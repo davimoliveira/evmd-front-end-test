@@ -47,7 +47,6 @@ const Home = ({ navigation, user, dispatch}) => {
             email= {item.email}
             picture= {item.picture}
             onPress={() => {
-              console.log(index);
               dispatch({
                 type: 'ChooseUser',
                 index: index

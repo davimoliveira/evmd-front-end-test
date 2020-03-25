@@ -15,7 +15,6 @@ export default function user(state = {id: "-1", users: [], chosen: ''}, action) 
             };
         case 'FavoriteUser':
             var users = state.users;
-            console.log(users[state.chosen].favorite);
             if(users[state.chosen].favorite == 1){
                 users[state.chosen].favorite = 0;
             }else{

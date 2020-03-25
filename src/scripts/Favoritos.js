@@ -3,8 +3,6 @@ import db from '../services/connection';
 
 
 function UpdateUser(favorito, id){
-    console.log(id);
-    console.log(favorito);
     db.transaction( tx => {
         tx.executeSql(
             `UPDATE users SET favorite=? WHERE _id=?`,
@@ -25,7 +23,6 @@ function SendIt(dispatch){
 }
 
 export default async (valor, id, dispatch) =>{
-    console.log("Abab")
     var favorito = 0;
     if(valor){
         favorito = 1;

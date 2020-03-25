@@ -28,7 +28,7 @@ const Details = ({user: {chosen, users}, dispatch}) => (
     </View>
     <TouchableOpacity
       style={styles.button}
-      onPress={()=>{Favoritos(!users[chosen].favorite, users[chosen]._id, dispatch); console.log("miau")}}
+      onPress={()=>{Favoritos(!users[chosen].favorite, users[chosen]._id, dispatch);}}
     >
       <Text>
       {users[chosen].favorite == 1?"Remover dos ":"Adicionar aos "} favoritos
@@ -74,7 +74,6 @@ const styles = StyleSheet.create({
   },
 });
 export default connect(state =>{
-  console.log(state.user.chosen);
   return state;
 }
 )(Details);
