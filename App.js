@@ -1,5 +1,7 @@
 import React, { useEffect, useCallback } from 'react';
-import { CreateDatabase } from './src/scripts';
+import { Provider } from 'react-redux';
+import store from "./src/store";
+import { CreateDatabase, LoadUsers } from './src/scripts';
 import Routes from './src/routes';
 
 export default function App() {
@@ -12,6 +14,8 @@ export default function App() {
   }, []);
 
   return (
-    <Routes />
+    <Provider store={store}>
+      <Routes />
+    </Provider>
   );
 }

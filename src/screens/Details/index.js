@@ -2,13 +2,16 @@ import React from 'react';
 import {
   View, Image, StyleSheet, Text, TouchableOpacity,
 } from 'react-native';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {Favoritos} from '../../scripts';
 
-const Details = () => (
+const Details = ({user: {chosen, users}, dispatch}) => (
   <View style={styles.container}>
     <View>
       <Image
         source={{
-          uri: 'http://placehold.it/1024x1024',
+          uri: users[chosen].picture,
         }}
         style={styles.image}
       />
@@ -16,22 +19,31 @@ const Details = () => (
     <View
       style={styles.detailsContainer}
     >
-      <Text>Nome: Ighor</Text>
-      <Text>E-mail: email@email.com</Text>
-      <Text>Idade: 23</Text>
-      <Text>Salário: 1,767.09</Text>
-      <Text>Latitude: 66.701576</Text>
-      <Text>Longitude: 178.865541</Text>
+      <Text>Nome: {users[chosen].name}</Text>
+      <Text>E-mail: {users[chosen].email}</Text>
+      <Text>Idade: {users[chosen].age}</Text>
+      <Text>Salário: {users[chosen].balance}</Text>
+      <Text>Latitude: {users[chosen].latitude}</Text>
+      <Text>Longitude: {users[chosen].longitude}</Text>
     </View>
     <TouchableOpacity
       style={styles.button}
+      onPress={()=>{Favoritos(!users[chosen].favorite, users[chosen]._id, dispatch); console.log("miau")}}
     >
       <Text>
-        Favorito
+      {users[chosen].favorite == 1?"Remover dos ":"Adicionar aos "} favoritos
       </Text>
     </TouchableOpacity>
   </View>
 );
+
+Details.propTypes = {
+  user: PropTypes.object.isRequired,
+  choosen: PropTypes.number,
+  users: PropTypes.array,
+  dispatch: PropTypes.func.isRequired
+};
+
 
 const styles = StyleSheet.create({
   container: {
@@ -61,5 +73,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#e5e5e5',
   },
 });
-
-export default Details;
+export default connect(state =>{
+  console.log(state.user.chosen);
+  return state;
+}
+)(Details);
